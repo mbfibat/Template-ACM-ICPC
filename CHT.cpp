@@ -25,8 +25,10 @@ struct Template_CHT
             hull.pop_back();
             vecs.pop_back();
         }
-        if(!hull.empty()) {
-            vecs.push_back(1 * (nw - hull.back()));
+        if(!hull.empty()) 
+        {
+            point tmp(0,1);
+            vecs.push_back(tmp * (nw - hull.back()));
         }
         hull.push_back(nw);
     }
