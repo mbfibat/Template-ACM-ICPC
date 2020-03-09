@@ -1,7 +1,7 @@
 struct FlowEdge
 {
     int u, v;
-    long long c, f;
+    long long c, f = 0;
     FlowEdge(){}
     FlowEdge(int _u,int _v,long long _c)
     {
@@ -29,7 +29,7 @@ struct Template_Dinic
     void add_edge(int u,int v,long long c)
     {
         Edges.push_back(FlowEdge(u,v,c));
-        Edges.push_back(FlowEdge(v,u,0));
+        Edges.push_back(FlowEdge(v,u,c));
         AdjList[u].push_back(m);
         AdjList[v].push_back(m + 1);
         m += 2;
@@ -65,9 +65,9 @@ struct Template_Dinic
             if (d[u] + 1 == d[v] && Edges[id].f < Edges[id].c)
             {
                 long long nxt = dfs(v, min(cur,Edges[id].c - Edges[id].f));
-                if (!nxt) return 0;
+                if (!nxt) continue;
                 Edges[id].f += nxt;
-                Edges[id ^ 1].f += nxt;
+                Edges[id ^ 1].f -= nxt;
                 return nxt;
             }
         }
