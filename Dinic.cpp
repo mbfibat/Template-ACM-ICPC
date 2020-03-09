@@ -29,7 +29,7 @@ struct Template_Dinic
     void add_edge(int u,int v,long long c)
     {
         Edges.push_back(FlowEdge(u,v,c));
-        Edges.push_back(FlowEdge(v,u,c));
+        Edges.push_back(FlowEdge(v,u,0)); // Set this to c if the edge is undirected
         AdjList[u].push_back(m);
         AdjList[v].push_back(m + 1);
         m += 2;
